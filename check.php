@@ -60,7 +60,7 @@ Bank: $bank
 Country: $country $emoji
 Currency: $currency
 Credit/Debit:$type
-Checked By @$username ***");
+Checked By ASUUUUU@$username ***");
     }
 else {
     send_MDmessage($chat_id, "Enter Valid BIN");
