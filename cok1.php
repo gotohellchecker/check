@@ -29,12 +29,17 @@
 	CURLOPT_MAXREDIRS => 10,
 	CURLOPT_TIMEOUT => 30,
 	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-	CURLOPT_CUSTOMREQUEST => "GET"],
+	CURLOPT_CUSTOMREQUEST => "GET",
+	CURLOPT_HTTPHEADER => [
+		"authority: tes-code485572.codeanyapp.com",
+		"accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+		"accept-language: en,id-ID;q=0.9,id;q=0.8,en-US;q=0.7"],
 ]);
 
 $result = curl_exec($curl);
 curl_close($curl);
-$result = trim(strip_tags(getstr($result,'<br>','<br>')));
+data = json_decode($result, true);
+$result = $data['result'];
   if ($result != null) {
         send_MDmessage($chat_id, "***
     Bin: $bin
