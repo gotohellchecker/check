@@ -40,6 +40,7 @@ $result = curl_exec($curl);
 curl_close($curl);
 data = json_decode($result, true);
 $result = $data['result'];
+echo "$result";
   if ($result != null) {
         send_MDmessage($chat_id, "***
     Bin: $bin
