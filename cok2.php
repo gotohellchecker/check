@@ -19,28 +19,18 @@
 
 //Bin Lookup
    if(strpos($message, "/bin") === 0){
-        $bin = substr($message, 5);
-   $curl = curl_init();
-   curl_setopt_array($curl, [
-	CURLOPT_URL => "http://gotohell.me/other/api.php?lista=".$bin,
-	CURLOPT_RETURNTRANSFER => true,
-	CURLOPT_FOLLOWLOCATION => true,
-	CURLOPT_ENCODING => "",
-	CURLOPT_MAXREDIRS => 10,
-	CURLOPT_TIMEOUT => 30,
-	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-	CURLOPT_CUSTOMREQUEST => "GET",
-	CURLOPT_HTTPHEADER => [
-		"authority: tes-code485572.codeanyapp.com",
-		"accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-		"accept-language: en,id-ID;q=0.9,id;q=0.8,en-US;q=0.7"],
-]);
-
+   $bin = substr($message, 69);
+$url = 'http://gotohell.me/other/api.php?lista='.$bin.'';
+$curl = curl_init($url);
+curl_setopt($curl, CURLOPT_URL, $url);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+//for debug only!
+curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 $result = curl_exec($curl);
 curl_close($curl);
 data = json_decode($result, true);
 $result = $data['result'];
-echo "$result";
   if ($result != null) {
         send_MDmessage($chat_id, "***
     Bin: $bin
@@ -57,5 +47,4 @@ else {
         $text = urlencode($message);
         file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?chat_id=$chat_id&text=$text&parse_mode=Markdown");
     }
-    
 ?>
