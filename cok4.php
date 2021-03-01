@@ -21,27 +21,19 @@
    if(strpos($message, "/bin") === 0){
         $bin = substr($message, 5);
    $curl = curl_init();
-   curl_setopt_array($curl, [
-	CURLOPT_URL => "http://gotohell.me/other/api.php?lista=".$bin,
-	CURLOPT_RETURNTRANSFER => true,
-	CURLOPT_FOLLOWLOCATION => true,
-	CURLOPT_ENCODING => "",
-	CURLOPT_MAXREDIRS => 10,
-	CURLOPT_TIMEOUT => 30,
-	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-	CURLOPT_CUSTOMREQUEST => "GET",
+	curl_setopt_array($curl, [
+	CURLOPT_URL => "http://gotohell.me/other/bot.php?lista=".$bin,
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 ]);
 
 $result = curl_exec($curl);
 curl_close($curl);
-$data = json_decode($result, true);
-
-$cok = $data['cok'];
-$hasil = $data['result'];
-  if ($cok != null) {
+$hasil = $result['<br>'];
+  if ($result != null) {
         send_MDmessage($chat_id, "***
     Bin: $bin
-Type: $cok
 Credit/Debit:$hasil
 Checked By @$username ***");
     }
@@ -49,6 +41,7 @@ else {
     send_MDmessage($chat_id, "Enter Valid BIN");
 }
    }
+    
 //Send Messages with Markdown (Global)
       function send_MDmessage($chat_id, $message){
        $apiToken = "1662123689:AAEiZBqjdakgn3RKJ_Dz9raRSpHw-9V7MaU";
