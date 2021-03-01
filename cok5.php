@@ -44,7 +44,7 @@ else {
     
 //Send Messages with Markdown (Global)
       function send_MDmessage($chat_id, $message){
-       $apiToken = "1662123689:AAEiZBqjdakgn3RKJ_Dz9raRSpHw-9V7MaU";
+       $apiToken = "1641864324:AAHqKgh3HdWaawjwAj-gDB_bOMWW0Xi27K4";
         $text = urlencode($message);
         file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?chat_id=$chat_id&text=$text&parse_mode=Markdown");
     }
