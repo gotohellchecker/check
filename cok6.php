@@ -22,24 +22,14 @@
         $bin = substr($message, 5);
    $curl = curl_init();
 	curl_setopt_array($curl, [
-	CURLOPT_URL => "http://gotohell.me/other/bot.php?lista=".$bin,
+	CURLOPT_URL => 'http://gotohell.me/other/bot.php?lista='.$bin.'';
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
 	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 ]);
-
 $result = curl_exec($curl);
 curl_close($curl);
-$hasil = $result['<br>'];
-  if ($result != null) {
-        send_MDmessage($chat_id, "***
-    Bin: $bin
-Credit/Debit:$hasil
-Checked By @$username ***");
-    }
-else {
-    send_MDmessage($chat_id, "Enter Valid BIN");
-}
+$message = "$result";
    }
     
 //Send Messages with Markdown (Global)
