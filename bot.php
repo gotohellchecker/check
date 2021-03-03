@@ -54,26 +54,17 @@ You can also make a bot like this from here:- https://github.com/BenchamXd/Bin-C
 if(strpos($text,"/bin") !== false){ 
 $bin = trim(str_replace("/bin","",$text)); 
 
-$data = json_decode(file_get_contents("https://lookup.binlist.net/$bin"),true);
-$bank = $data['bank']['name'];
-$country = $data['country']['alpha2'];
-$currency = $data['country']['currency'];
-$emoji = $data['country']['emoji'];
-$scheme = $data['scheme'];
-$Brand = $data['brand'];
-$type = $data['type'];
- if($data['scheme']){
+$data = json_decode(file_get_contents("http://gotohell.me/b0t/api.php?lista=$bin"),true);
+$message = $data['error']['message'];
+$decline_code = $data['error']['decline_code'];
+$succeeded = $data['status'];
+ if($data['error']['message']){
 bot('sendmessage', [
                 'chat_id' =>$chat_id,
                 'text' =>"***VALID BIN✅
                 
 Bin: $bin
-Type: $scheme
-Brand : $Brand
-Bank: $bank
-Country: $country $emoji
-Currency: $currency
-Credit/Debit:$type
+Status: { $succeeded } - { $message } - { $decline_code }
 Checked By @$username***",
 'parse_mode'=>"MarkDown",
 ]);
