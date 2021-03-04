@@ -3,7 +3,7 @@
 BY:- @BenchamXD
 CHANNEL:- @IndusBots
 */
-error_reporting(0);
+error_reporting(1);
 
 set_time_limit(0);
 
